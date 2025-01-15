@@ -515,6 +515,8 @@ export class ClientBase extends EventEmitter {
             SearchMode.Latest
         );
 
+        elizaLogger.log("Mention and interaction tweets.:......", mentionsAndInteractions.tweets);
+
         // Combine the timeline tweets and mentions/interactions
         const allTweets = [...timeline, ...mentionsAndInteractions.tweets];
 

@@ -726,6 +726,14 @@ export class TwitterPostClient {
 
             elizaLogger.debug('Final reply text to be sent:', replyText);
 
+            // Sleep function implementation
+            const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
+            // Add a 10-second delay before sending the tweet
+            await sleep(2 * 60 * 1000);
+
+            elizaLogger.debug("Replying to tweet for 3... Now...");
+
             // Send the tweet through request queue
             const result = await this.client.requestQueue.add(
                 async () => await this.client.twitterClient.sendTweet(
@@ -735,6 +743,7 @@ export class TwitterPostClient {
             );
 
             const body = await result.json();
+            elizaLogger.debug('Tweet reply creation result........dkjcjds:', body);
 
             if (body?.data?.create_tweet?.tweet_results?.result) {
                 elizaLogger.log('Successfully posted reply tweet');
